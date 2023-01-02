@@ -1,5 +1,17 @@
 from django.contrib import admin
+from django.contrib.admin.options import ModelAdmin, TabularInline
 
-from apps.polls.models import Question
+from apps.polls.models import (
+    Question,
+    Choice,
+)
 
-admin.site.register(Question)
+
+class ChoiseAdmin(TabularInline):
+    model = Choice
+    ...
+
+
+@admin.register(Question)
+class QuestionAdmin(ModelAdmin):
+    inlines = (ChoiseAdmin,)
